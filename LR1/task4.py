@@ -6,7 +6,7 @@ w = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
 h = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-video_writer = cv2.VideoWriter(r'..\resources\output.mp4', fourcc, 60, (w, h))
+video_writer = cv2.VideoWriter(r'..\resources\output4.mp4', fourcc, 60, (w, h))
 
 while True:
     ok, vid = video.read()
