@@ -13,7 +13,7 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     lower_red = np.array([0, 150, 150])
-    upper_red = np.array([100, 255, 255])  # оттенок насыщенность яркость
+    upper_red = np.array([15, 255, 255])  # оттенок насыщенность яркость
 
     mask = cv2.inRange(hsv, lower_red, upper_red)
     onlyRed_frame = cv2.bitwise_and(frame, frame, mask=mask)

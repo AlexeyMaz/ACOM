@@ -12,7 +12,7 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     lower_red = np.array([0, 150, 150])
-    upper_red = np.array([100, 255, 255])  # оттенок насыщенность яркость
+    upper_red = np.array([15, 255, 255])  # оттенок насыщенность яркость
 
     mask = cv2.inRange(hsv, lower_red, upper_red)
     kernel = np.ones((5, 5), np.uint8)
@@ -20,11 +20,6 @@ while True:
     opening = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
     closing = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
 
-    erosion = cv2.erode(mask, kernel, iterations=1)
-    dilation = cv2.dilate(mask, kernel, iterations=1)
-
-    cv2.imshow("Erosion", erosion)
-    cv2.imshow("Dilation", dilation)
     cv2.imshow("Opening", opening)
     cv2.imshow("Closing", closing)
 
