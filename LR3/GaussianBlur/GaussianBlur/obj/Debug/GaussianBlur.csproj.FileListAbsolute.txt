@@ -1,0 +1,10 @@
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\bin\Debug\GaussianBlur.exe.config
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\bin\Debug\GaussianBlur.exe
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\bin\Debug\GaussianBlur.pdb
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.csproj.AssemblyReference.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.Properties.Resources.resources
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.csproj.GenerateResource.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.csproj.CoreCompileInputs.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.exe
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.pdb
+C:\Users\AlmaZ\PycharmProjects\acom\LR3\GaussianBlur\GaussianBlur\obj\Debug\GaussianBlur.Form1.resources
