@@ -110,6 +110,41 @@ def main(path, standard_deviation, kernel_size):
     print('Матрица значений углов градиента:')
     print(img_angles_to_print)
 
+    # Задание 3 - подавление немаксимумов
+    # инициализация массива границ изображения
+    img_border = img.copy()
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            angle = img_angles[i][j]
+            gradient = matr_gradient[i][j]
+            # проверка находится ли пиксель на границе изображения
+            if i == 0 or i == img.shape[0] - 1 or j == 0 or j == img.shape[1] - 1:
+                img_border[i][j] = 0
+            # определение смещения по осям в зависимости от значения угла градиента
+            else:
+                x_shift = 0
+                y_shift = 0
+                # смещение по оси абсцисс
+                if angle == 0 or angle == 4:
+                    x_shift = 0
+                elif angle > 0 and angle < 4:
+                    x_shift = 1
+                else:
+                    x_shift = -1
+                # смещение по оси ординат
+                if angle == 2 or angle == 6:
+                    y_shift = 0
+                elif angle > 2 and angle < 6:
+                    y_shift = -1
+                else:
+                    y_shift = 1
+                # проверка является ли пиксель максимальным значением градиента
+                is_max = gradient >= matr_gradient[i + y_shift][j + x_shift] and gradient >= matr_gradient[i - y_shift][
+                    j - x_shift]
+                img_border[i][j] = 255 if is_max else 0
+
+    cv2.imshow('img_border ' + str(i), img_border)
+
     cv2.waitKey(0)
 
 
