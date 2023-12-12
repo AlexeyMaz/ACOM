@@ -5,7 +5,7 @@ import numpy as np
 # реализация операции свёртки
 def Convolution(img, kernel):
     kernel_size = len(kernel)
-    matr = img.copy()
+    matr = np.zeros(img.shape)
     # начальные координаты для итераций по пикселям
     x_start = kernel_size // 2
     y_start = kernel_size // 2
@@ -21,7 +21,7 @@ def Convolution(img, kernel):
     return matr
 
 
-# схема округления угла
+# нахождение округления угла между вектором градиента и осью Х
 def get_angle_number(x, y):
     tg = y / x if x != 0 else 999
 
@@ -57,12 +57,7 @@ def get_angle_number(x, y):
                 return 4
 
 
-i = 0
-
-
-def main(path, standard_deviation, kernel_size):
-    global i
-    i += 1
+def main(path, standard_deviation, kernel_size, threshold):
     # Задание 1 - чтение строки полного адреса изображения и размытие Гаусса
     img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     imgBlur_CV2 = cv2.GaussianBlur(img, (kernel_size, kernel_size), standard_deviation)
@@ -97,7 +92,7 @@ def main(path, standard_deviation, kernel_size):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_gradient_to_print[i][j] = (float(matr_gradient[i][j]) / max_gradient) * 255
-    cv2.imshow('img_gradient_to_print ' + str(i), img_gradient_to_print)
+    cv2.imshow('Matrix_gradient', img_gradient_to_print)
     print('Матрица значений длин градиента:')
     print(img_gradient_to_print)
 
@@ -106,7 +101,7 @@ def main(path, standard_deviation, kernel_size):
     for i in range(img.shape[0]):
         for j in range(img.shape[1]):
             img_angles_to_print[i][j] = img_angles[i][j] * 45
-    cv2.imshow('img_angles_to_print ' + str(i), img_angles_to_print)
+    cv2.imshow('Matrix_angles', img_angles_to_print)
     print('Матрица значений углов градиента:')
     print(img_angles_to_print)
 
@@ -127,14 +122,14 @@ def main(path, standard_deviation, kernel_size):
                 # смещение по оси абсцисс
                 if angle == 0 or angle == 4:
                     x_shift = 0
-                elif angle > 0 and angle < 4:
+                elif 0 < angle < 4:
                     x_shift = 1
                 else:
                     x_shift = -1
                 # смещение по оси ординат
                 if angle == 2 or angle == 6:
                     y_shift = 0
-                elif angle > 2 and angle < 6:
+                elif 2 < angle < 6:
                     y_shift = -1
                 else:
                     y_shift = 1
@@ -143,9 +138,37 @@ def main(path, standard_deviation, kernel_size):
                     j - x_shift]
                 img_border[i][j] = 255 if is_max else 0
 
-    cv2.imshow('img_border ' + str(i), img_border)
-
+    cv2.imshow('img_border', img_border)
+    # Задание 4 - двойная пороговая фильтрация
+    # задание пороговых границ для градиента
+    lower_threshold = max_gradient / threshold
+    upper_threshold = max_gradient - max_gradient / threshold
+    # инициализация массива результата
+    double_filtration = np.zeros(img.shape)
+    for i in range(img.shape[0]):
+        for j in range(img.shape[1]):
+            gradient = matr_gradient[i][j]
+            # проверка находится ли пиксель на границы изображения
+            if img_border[i][j] == 255:
+                # проверка градиента в диапазоне
+                if lower_threshold <= gradient <= upper_threshold:
+                    flag = False
+                    # проверка пикселя с максимальной длиной градиента среди соседей
+                    for k in range(-1, 2):
+                        for l in range(-1, 2):
+                            if flag:
+                                break
+                            # поиск границы
+                            if img_border[i + k][j + l] == 255 and matr_gradient[i + k][j + l] >= lower_threshold:
+                                flag = True
+                                break
+                    if flag:
+                        double_filtration[i][j] = 255
+                # если значение градиента выше - верхней границы, то пиксель точно граница
+                elif gradient > upper_threshold:
+                    double_filtration[i][j] = 255
+    cv2.imshow('Double_filtration', double_filtration)
     cv2.waitKey(0)
 
 
-main(r'..\resources\balls.jpg', 3, 3)
+main(r'..\resources\balls.jpg', 3, 3, 15)
