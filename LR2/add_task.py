@@ -37,7 +37,7 @@ while True:
                       (c_x + (width // c), c_y + (height // c)),
                       color, thickness)
 
-        a = 0
+        a = 7
         b = 1000
         # левая часть прицела
         cv2.rectangle(frame,
@@ -64,7 +64,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == 27:
         break
 
-print("Площадь объекта:", area)
 
 cap.release()
 cv2.destroyAllWindows()
