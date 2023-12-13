@@ -1,0 +1,10 @@
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\bin\Debug\CannyBorderDetector.exe.config
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\bin\Debug\CannyBorderDetector.exe
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\bin\Debug\CannyBorderDetector.pdb
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.csproj.AssemblyReference.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.Properties.Resources.resources
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.csproj.GenerateResource.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.csproj.CoreCompileInputs.cache
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.exe
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.pdb
+C:\Users\AlmaZ\PycharmProjects\acom\LR4\CannyBorderDetector\CannyBorderDetector\obj\Debug\CannyBorderDetector.Form1.resources
