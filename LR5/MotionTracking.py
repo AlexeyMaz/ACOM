@@ -3,13 +3,14 @@ import numpy as np
 
 i = 0
 
+
 # Здесь определяется функция main с четырьмя аргументами:
 # kernel_size (размер ядра для гауссова размытия),
 # standard_deviation (стандартное отклонение для гауссова размытия),
-# delta_tresh (порог значений для бинаризации разности между кадрами)
+# delta_thresh (порог значений для бинаризации разности между кадрами)
 # и min_area (минимальная площадь контура для рассмотрения).
 
-def main(kernel_size, standard_deviation, delta_tresh, min_area):
+def main(kernel_size, standard_deviation, delta_thresh, min_area):
     global i
     i += 1
 
@@ -29,9 +30,8 @@ def main(kernel_size, standard_deviation, delta_tresh, min_area):
     # вышеуказанный кодек для записи выводимого видео с заданной
     # частотой кадров(144 кадров в секунду) и размерами кадров w на h.
 
-
     while True:
-        # сохраняем старый кадр чтобы вычислить разниц между кадрами
+        # сохраняем старый кадр, чтобы вычислить разниц между кадрами
         print("...")
         old_img = img.copy()
         ok, frame = video.read()
@@ -45,18 +45,17 @@ def main(kernel_size, standard_deviation, delta_tresh, min_area):
         diff = cv2.absdiff(img, old_img)
 
         # Абсолютная разность бинаризуется: пиксели с
-        # интенсивностью выше delta_tresh становятся
+        # интенсивностью выше delta_thresh становятся
         # белыми(255), остальные - черными.
-        thresh = cv2.threshold(diff, delta_tresh, 255, cv2.THRESH_BINARY)[1]
+        thresh = cv2.threshold(diff, delta_thresh, 255, cv2.THRESH_BINARY)[1]
         # print(thresh)
         # cv2.imshow("a",thresh)
         # находим контуры
-        (contors, hierarchy) = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-
-        # если на кадре есть хотя бы один контур, чья площадь достаточно большая то записываем кадр
-        for contr in contors:
-            area = cv2.contourArea(contr)
+        # если на кадре есть хотя бы один контур, чья площадь достаточно большая, то записываем кадр
+        for contour in contours:
+            area = cv2.contourArea(contour)
             if area < min_area:
                 continue
             video_writer.write(frame)
@@ -65,27 +64,28 @@ def main(kernel_size, standard_deviation, delta_tresh, min_area):
 
     print("готово!")
 
+
 kernel_size = 3
 standard_deviation = 50
-delta_tresh = 60
+delta_thresh = 60
 min_area = 20
-main(kernel_size, standard_deviation, delta_tresh, min_area)
+main(kernel_size, standard_deviation, delta_thresh, min_area)
 
 # оптимальный вариант
 kernel_size = 11
 standard_deviation = 70
-delta_tresh = 60
+delta_thresh = 60
 min_area = 20
-main(kernel_size, standard_deviation, delta_tresh, min_area)
+main(kernel_size, standard_deviation, delta_thresh, min_area)
 
 kernel_size = 3
 standard_deviation = 50
-delta_tresh = 20
+delta_thresh = 20
 min_area = 20
-main(kernel_size, standard_deviation, delta_tresh, min_area)
+main(kernel_size, standard_deviation, delta_thresh, min_area)
 
 kernel_size = 3
 standard_deviation = 50
-delta_tresh = 60
+delta_thresh = 60
 min_area = 10
-main(kernel_size, standard_deviation, delta_tresh, min_area)
+main(kernel_size, standard_deviation, delta_thresh, min_area)
