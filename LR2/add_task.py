@@ -8,37 +8,33 @@ while True:
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     lower_red = np.array([0, 120, 200])
-    upper_red = np.array([100, 255, 255])  # оттенок насыщенность яркость
+    upper_red = np.array([100, 255, 255])
 
+    # Создаем маску для красного цвета
     mask = cv2.inRange(hsv, lower_red, upper_red)
 
-    # применение маски на изображение
-    res = cv2.bitwise_and(frame, frame, mask=mask)
+    # Находим контуры в бинарном изображении
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # вычисление момента на основе маски
-    moments = cv2.moments(mask)
+    for contour in contours:
+        # Пропускаем слишком маленькие контуры
+        if cv2.contourArea(contour) < 500:
+            continue
 
-    # поиск момента первого порядка
-    area = moments['m00']
+        # Вычисляем координаты и размеры прямоугольника, в который вписан контур
+        x, y, w, h = cv2.boundingRect(contour)
 
-    if area > 0:
-        # ширина и высота прямоугольника равны квадратному корню из площади объекта
-        width = height = int(np.sqrt(area))
-        # вычисление координат центра объекта на изображении с использованием момент первого порядка
-        c_x = int(moments["m10"] / moments["m00"])
-        c_y = int(moments["m01"] / moments["m00"])
-        # отрисовка прямоугольника
-        color = (0, 0, 0)
-        color2 = (0, 255, 0)
-        thickness = 2  # толщина
-        c = 20
-        cv2.rectangle(frame,
-                      (c_x - (width // c), c_y - (height // c)),
-                      (c_x + (width // c), c_y + (height // c)),
-                      color, thickness)
+        # Рисуем черный прямоугольник вокруг контура на оригинальном кадре
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 0), 2)
 
+        # Рисуем зеленые прицелы в центре прямоугольника
         a = 7
         b = 1000
+        c_x = x + w // 2
+        c_y = y + h // 2
+
+        color2 = (0, 255, 0)
+
         # левая часть прицела
         cv2.rectangle(frame,
                       (c_x - (b // 256) - a, c_y - (b // 256)),
@@ -63,7 +59,6 @@ while True:
     cv2.imshow('Result_frame', frame)
     if cv2.waitKey(1) & 0xFF == 27:
         break
-
 
 cap.release()
 cv2.destroyAllWindows()
