@@ -46,6 +46,9 @@ def video_rec():
         inference_times.append(inference_time)
 
         print(rects)
+
+        start_time = time.time()
+
         for (x, y, w, h) in rects:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
