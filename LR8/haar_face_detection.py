@@ -92,9 +92,7 @@ def camera_detect():
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
         cv2.imshow("Frame", frame)
-        key = cv2.waitKey(1) & 0xFF
-
-        if key == ord("q"):
+        if cv2.waitKey(1) & 0xFF == 27:
             break
 
     cv2.destroyAllWindows()
