@@ -1,0 +1,6 @@
+;avg_of_aug;filtered_rec;straight;easy_ocr;;
+full_match  base;2.66%;2.44%;0%;19.29%;;
+full_match  on_train;5.32%;5.32%;0.89%;0%;;Вывод: Avg_of_aug выдал лучшие результаты для TesseractOCR
+;;;;;;Easy_ocr показал лучшие результаты на классическом предобученном датасете
+part_match base;3.77%;2.22%;1.11%;81.15%;;
+part_match on_train;16.85%;11.31%;13.75%;0%;;
