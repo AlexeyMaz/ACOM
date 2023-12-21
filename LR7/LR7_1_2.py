@@ -7,7 +7,7 @@ import glob
 
 from calculate_similarity_score import calculate_similarity_score
 
-from augmentation import augment_dataset
+# from augmentation import augment_dataset
 
 pytesseract.pytesseract.tesseract_cmd = r"C:/Program Files/Tesseract-OCR/tesseract.exe"
 
@@ -240,7 +240,7 @@ def part2():
     validation_type = 'full_match'
 
     # Аугментировать датасет
-    augment_dataset(original_dataset_path, augmented_dataset_path)
+    # augment_dataset(original_dataset_path, augmented_dataset_path)
 
     # Получяем список всех изображений в аугментированном датасете
     augmented_images = glob.glob(os.path.join(augmented_dataset_path, '*.jpg'))
